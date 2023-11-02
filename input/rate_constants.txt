@@ -1,0 +1,15 @@
+kd    k=1E5 f=0.5
+kpAAA k=1e3
+kpAAB k=1e3
+kpABA k=1e3
+kpABB k=1e3
+kpBAA k=1e3
+kpBAB k=1e3
+kpBBA k=1e3
+kpBBB k=1e3
+ktcAA k=1e3
+ktcAB k=1e3
+ktcBB k=1e3
+ktdAA k=1e3
+ktdAB k=1e3
+ktdBB A=1e5 E=1e-3

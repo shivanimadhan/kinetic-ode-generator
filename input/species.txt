@@ -1,0 +1,14 @@
+U I      c0=0.005 FW=50.0
+U R               FW=25.0
+U A      c0=1.5   FW=100.0
+U B      c0=1.5   FW=200.0
+P P[R.A]
+P P[R.B]
+P P[A.A]
+P P[A.B] 
+P P[B.A] 
+P P[B.B] 
+P D      
+
+P P[-.A]=P[A.A]&|P[B.A]
+P P[-.B]=P[A.B]&|P[B.B]

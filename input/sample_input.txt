@@ -1,0 +1,74 @@
+species
+    # hi
+    U I      c0=0.005 FW=50.0
+    U R      c0=0.0   FW=25.0
+    U A      c0=1.5   FW=100.
+    U B      c0=1.5   FW=200.
+    P P[R.A] c0=0.0
+    P P[R.B] c0=0.0
+    P P[A.A] c0=0.0
+    P P[A.B] c0=0.0
+    P P[B.A] c0=0.0
+    P P[B.B] c0=0.0
+    P D      c0=0.0
+
+    P P[-.A] eq=P[A.A]|P[B.A]
+    P P[-.B] eq=P[A.B]|P[B.B]
+end
+
+rate constants
+    kd    k=1E5 f=0.5
+    kpAAA k=1e3
+    kpAAB k=1e3
+    kpABA k=1e3
+    kpABB k=1e3
+    kpBAA k=1e3
+    kpBAB k=1e3
+    kpBBA k=1e3
+    kpBBB k=1e3
+    ktcAA k=1e3
+    ktcAB k=1e3
+    ktcBB k=1e3
+    ktdAA k=1e3
+    ktdAB k=1e3
+    ktdBB A=1e5 E=1e-3
+end
+
+
+reactions
+    ### Initiator decomposition reactions ###
+    ID I -kd-> 2R
+
+    ### Initiation reactions ###
+    IN R + A -kpAAA-> P[R.A]
+    IN R + B -kpBBB-> P[R.B]
+
+    ### First propagation reactions ###
+    PR P[R.A] + A -kpAAA-> P[A.A]
+    PR P[R.A] + B -kpAAB-> P[A.B]
+    PR P[R.B] + A -kpBBA-> P[B.A]
+    PR P[R.B] + B -kpBBB-> P[B.B]
+
+    ### Propagation reactions ###
+    PR P[A.A] + A -kpAAA-> P[A.A]
+    PR P[A.A] + B -kpAAB-> P[A.B]
+    PR P[A.B] + A -kpABA-> P[B.A]
+    PR P[A.B] + B -kpABB-> P[B.B]
+    PR P[B.A] + A -kpBAA-> P[A.A]
+    PR P[B.A] + B -kpBAB-> P[A.B]
+    PR P[B.B] + A -kpBBA-> P[B.A]
+    PR P[B.B] + B -kpBBB-> P[B.B]
+
+    ### Depropagation reactions ###
+    DP P[B.B] -kdBB-> P[-.B] + B
+
+    ### Termination (comb.) reactions ###
+    TC P[-.A] + P[-.A] -ktcAA-> D
+    TC P[-.A] + P[-.B] -ktcAB-> D
+    TC P[-.B] + P[-.B] -ktcBB-> D
+
+    ### Termination (disp.) reactions ###
+    TD P[-.A] + P[-.A] -ktcAA-> 2D
+    TD P[-.A] + P[-.B] -ktcAB-> 2D
+    TD P[-.B] + P[-.B] -ktcBB-> 2D
+end

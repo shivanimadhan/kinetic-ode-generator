@@ -1,0 +1,42 @@
+### Initiator decomposition reactions ###
+ID I -kd-> 2R
+
+### Initiation reactions ###
+IN R + A -kpAAA-> P[R.A]
+IN R + B -kpBBB-> P[R.B]
+
+### First propagation reactions ###
+PR P[R.A] + A -kpAAA-> P[A.A]
+PR P[R.A] + B -kpAAB-> P[A.B]
+PR P[R.B] + A -kpBBA-> P[B.A]
+PR P[R.B] + B -kpBBB-> P[B.B]
+
+### Propagation reactions ###
+PR P[A.A] + A -kpAAA-> P[A.A]
+PR P[A.A] + B -kpAAB-> P[A.B]
+PR P[A.B] + A -kpABA-> P[B.A]
+PR P[A.B] + B -kpABB-> P[B.B]
+PR P[B.A] + A -kpBAA-> P[A.A]
+PR P[B.A] + B -kpBAB-> P[A.B]
+PR P[B.B] + A -kpBBA-> P[B.A]
+PR P[B.B] + B -kpBBB-> P[B.B]
+
+### Depropagation reactions ###
+DP P[B.B] -kdBB-> P[-.B] + B
+
+### Termination (comb.) reactions ###
+TC P[-.A] + P[-.A] -ktcAA-> D
+# P[A.A] + P[A.A]
+# P[B.A] + P[A.A]
+# P[B.A] + P[B.A]
+TC P[-.A] + P[-.B] -ktcAB-> D
+# P[A.A] + P[A.B]
+# P[B.A] + P[A.B]
+# P[A.A] + P[B.B]
+# P[B.A] + P[B.B]
+TC P[-.B] + P[-.B] -ktcBB-> D
+
+### Termination (disp.) reactions ###
+TD P[-.A] + P[-.A] -ktcAA-> 2D
+TD P[-.A] + P[-.B] -ktcAB-> 2D
+TD P[-.B] + P[-.B] -ktcBB-> 2D
