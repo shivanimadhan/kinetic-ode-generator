@@ -1,4 +1,4 @@
-kd    k=1E5 f=0.5
+kd    k=1e5 f=0.5
 kpAAA k=1e3
 kpAAB k=1e3
 kpABA k=1e3
