@@ -16,17 +16,6 @@ def parse_all_species(species_section:list):
 
     return list_of_all_species, list_of_equivalent_species
 
-# def foo(arg1, arg2):
-
-foo(arg1, arg2, kwarg1=0, kwarg2=2)
-
-def foo(args, **kwargs):
-
-    args = [arg1, arg2]
-    kwargs = {'kwarg1':0, 'kwarg2':2}
-    
-
-
 def parse_species_string(species_str:str):
 
     # Split the line by whitespace and remove empty elements
