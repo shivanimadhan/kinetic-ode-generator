@@ -110,6 +110,7 @@ def separate_input_file(input_filepath:str)->Dict[str, List[str]]:
             elif is_section_header(line):
                 current_section_header = line.strip()
 
+                # Add into section header func instead of leaving it here
                 if current_section_header not in VALID_SECTION_HEADERS:
                     raise Exception(f'\'{current_section_header}\' is not a valid section header. Valid section headers are {VALID_SECTION_HEADERS}')
 

@@ -12,7 +12,6 @@ class Species:
     FW:float=1.
     c0:float=0.
 
-
 @dataclass
 class EquivalentSpecies:
     name:str
