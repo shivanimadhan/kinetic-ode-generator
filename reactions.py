@@ -2,6 +2,7 @@
 from dataclasses import dataclass
 from typing import List, Dict
 import math
+from typing import List, Dict
 
 from species import Species
 
@@ -39,6 +40,48 @@ class ReactionSpecies:
     species:Species
     coeff:int
 
+<<<<<<< HEAD
+=======
+
+from dataclasses import dataclass
+import math
+from typing import List, Dict
+
+from species import Species
+
+class RateConstant:
+    def __init__(self, name, **kwargs):
+        self.name = name
+        self.parameters = kwargs
+
+    def get_k(self, temperature=None):
+        raise NotImplementedError("Subclasses must implement the get_k method")
+
+class ConstantRateConstant(RateConstant):
+    def __init__(self, name, k, **kwargs):
+        super().__init__(name, **kwargs)
+        self.k = k
+
+    def get_k(self, T:float):
+        return self.k
+
+class ArrheniusRateConstant(RateConstant):
+    def __init__(self, name, A, E, **kwargs):
+        super().__init__(name, **kwargs)
+        self.A = A
+        self.E = E
+
+    def get_k(self, T:float):
+        return self.A * math.exp(-self.E / (8.314 * T))
+
+
+@dataclass
+class ReactionSpecies:
+    name:str
+    species:Species
+    coeff:int
+
+>>>>>>> 82fc88d95cd345c73a027c3de27ca8bf2373795d
 class Reaction:
 
     def __init__(self, rate_constant: RateConstant,
@@ -126,6 +169,7 @@ class TerminationDisproportionationReaction(Reaction):
             poly_reactant_species=[poly_reactant1, poly_reactant2],
             unit_product_species=[],
             poly_product_species=[poly_product]
+<<<<<<< HEAD
         )
 
     def __init__(self, rate_constant: RateConstant,
@@ -141,3 +185,6 @@ class TerminationDisproportionationReaction(Reaction):
     def calculate_rate(self, c:dict):
 
         return self.rate_constant.get_k() * c[self.poly_reactants[0]] * c[self.poly_products[1]]      
+=======
+        )
+>>>>>>> 82fc88d95cd345c73a027c3de27ca8bf2373795d
