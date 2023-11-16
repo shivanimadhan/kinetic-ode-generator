@@ -12,6 +12,9 @@ class Species:
     FW:float=1.
     c0:float=0.
 
+    def __str__(self):
+        return name
+
 @dataclass
 class EquivalentSpecies:
     name:str
