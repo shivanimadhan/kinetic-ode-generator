@@ -4,17 +4,17 @@ from reactions import RateConstant
 
 class RateConstantParser:
 
-    all_constants = [];
-
+    # all_constants = []
+    
     def __init__(self):
-        pass
+        self.all_constants = []
 
-    def parse_all_constants(constants_section:list):
+    def parse_all_constants(self, constants_section:list):
         for constants_line in constants_section:
-            constant = RateConstantParser.parse_constants_string(constants_line)
-            RateConstantParser.all_constants.append(constant)
+            constant = self.parse_constants_string(constants_line)
+            self.all_constants.append(constant)
 
-    def parse_constants_string(constants_str:str):
+    def parse_constants_string(self, constants_str:str):
         args, kwargs = parse_args_kwargs(constants_str)
         
         name_str = args
@@ -30,11 +30,11 @@ class RateConstantParser:
         constant = RateConstant(name_str, **kwargs)
         return constant
 
-    def parse_reaction_constant(reaction_string):
+    def parse_reaction_constant(self, reaction_string):
         name = re.compile(r'-(\w+)->')
         match = name.search(reaction_string)
 
-        for c in RateConstantParser.all_constants:
+        for c in self.all_constants:
             if (match.group(1) == c.name[0]):
                 return c
 

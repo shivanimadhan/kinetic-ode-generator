@@ -57,7 +57,7 @@ class Reaction:
         self.all_species = self.reactant_species + self.product_species
 
     def calculate_rate(self, c: Dict[str, float]) -> float:
-        
+
         # Assumes elementary reactions
         rate = self.rate_constant.get_k()
         for reactant_species in self.reactant_species:
@@ -100,6 +100,19 @@ class PropagationReaction(Reaction):
             unit_reactant_species=[unit_reactant],
             poly_reactant_species=[poly_reactant],
             unit_product_species=[],
+            poly_product_species=[poly_product]
+        )
+
+class DepropagationReaction(Reaction):
+
+    def __init__(self, rate_constant: RateConstant,
+                 poly_reactant: ReactionSpecies, unit_product: ReactionSpecies, 
+                 poly_product: ReactionSpecies):
+        super().__init__(
+            rate_constant=rate_constant,
+            unit_reactant_species=[],
+            poly_reactant_species=[poly_reactant],
+            unit_product_species=[unit_product],
             poly_product_species=[poly_product]
         )
 
