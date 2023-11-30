@@ -63,6 +63,9 @@ class Reaction:
         for reactant_species in self.reactant_species:
             rate *= reactant_species.coeff * (c[reactant_species.name] ** reactant_species.coeff)
         return rate
+
+    def __repr__(self):
+        return f'Rate Constant:{self.rate_constant},\nUnit Reactant Species: {self.unit_reactant_species},\nPoly Reactant Species: {self.poly_reactant_species},\nUnit Product Species: {self.unit_product_species},\nPoly Product Species: {self.poly_product_species}\n\n'
     
 class InitiatorDecompositionReaction(Reaction):
 

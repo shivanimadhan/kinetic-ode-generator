@@ -67,7 +67,7 @@ class ReactionParser:
         # Use re.match() to find the match at the beginning of the string
         match = re.match(pattern, reaction_species_string)
 
-        if match:
+        if match: 
             coeff_part = match.group(1)
             name = match.group(2)
             if coeff_part:
