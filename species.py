@@ -1,11 +1,12 @@
 from dataclasses import dataclass
 from enum import Enum
+from typing import List
 
 class SpeciesType(Enum):
     UNIT = 1
     POLY = 2
 
-@dataclass
+@dataclass(frozen=True)
 class Species:
     name:str
     type:SpeciesType
@@ -13,13 +14,13 @@ class Species:
     c0:float=0.
 
     def __str__(self):
-        return name
+        return self.name
 
 @dataclass
 class EquivalentSpecies:
     name:str
     type:SpeciesType
-    eq:str
+    eq:List[str]
 
     # def __init__(self, name:str, type:SpeciesType, eq:str):
     #     self.name = name

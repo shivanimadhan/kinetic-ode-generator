@@ -1,6 +1,7 @@
 
 from dataclasses import dataclass
 from typing import List, Dict
+from collections import Counter
 import math
 from typing import List, Dict
 
@@ -34,7 +35,7 @@ class ArrheniusRateConstant(RateConstant):
     def get_k(self, T:float):
         return self.A * math.exp(-self.E / (8.314 * T))
 
-@dataclass
+@dataclass(frozen=True)
 class ReactionSpecies:
     #name:str
     species:Species
@@ -67,6 +68,9 @@ class Reaction:
     def __repr__(self):
         return f'Rate Constant:{self.rate_constant},\nUnit Reactant Species: {self.unit_reactant_species},\nPoly Reactant Species: {self.poly_reactant_species},\nUnit Product Species: {self.unit_product_species},\nPoly Product Species: {self.poly_product_species}\n\n'
     
+    def __eq__(self, other):
+        return (Counter(self.reactant_species) == Counter(other.reactant_species)) and (Counter(self.product_species) == Counter(other.product_species))
+
 class InitiatorDecompositionReaction(Reaction):
 
     def __init__(self, rate_constant: RateConstant, 

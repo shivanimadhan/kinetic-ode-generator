@@ -34,14 +34,13 @@ def parse_species_string(species_str:str):
     if 'FW' in kwargs:
         kwargs['FW'] = float(kwargs['FW'])
 
-    if 'c0' in kwargs and 'FW' in kwargs:
-        species = Species(name_str, species_type, **kwargs)
-        return species
-    elif 'eq' in kwargs:
+    if 'eq' in kwargs:
+        kwargs['eq'] = kwargs['eq'].split('|')
         species = EquivalentSpecies(name_str, species_type, **kwargs)
         return species
-    else:
-        raise Exception('Not cool.')
+    
+    species = Species(name_str, species_type, **kwargs)
+    return species
     
 def parse_species_type(type_str:str):
 
@@ -55,7 +54,7 @@ def parse_species_type(type_str:str):
 
 
 '''
-turn eq string into a list of species (convert strings into species)
+turn eq string into a list of species (convert strings into species)    done
 turn equivalent reaction into reaction strings with regular species objects
 
 '''
