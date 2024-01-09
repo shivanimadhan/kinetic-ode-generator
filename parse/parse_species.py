@@ -51,10 +51,3 @@ def parse_species_type(type_str:str):
     elif type_str == 'P':
         return SpeciesType.POLY
     return None
-
-
-'''
-turn eq string into a list of species (convert strings into species)    done
-turn equivalent reaction into reaction strings with regular species objects
-
-'''

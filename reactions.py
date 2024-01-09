@@ -1,4 +1,3 @@
-
 from dataclasses import dataclass
 from typing import List, Dict
 from collections import Counter
@@ -12,8 +11,8 @@ class RateConstant:
         self.name = name
         self.parameters = kwargs
 
-    def get_k(self, temperature=None):
-        raise NotImplementedError("Subclasses must implement the get_k method")
+    def get_k(self):
+        return 0.0
     
     def __repr__(self):
         return f'{self.name}, {self.parameters}'
@@ -23,7 +22,7 @@ class ConstantRateConstant(RateConstant):
         super().__init__(name, **kwargs)
         self.k = k
 
-    def get_k(self, T:float):
+    def get_k(self, T: float):
         return self.k
 
 class ArrheniusRateConstant(RateConstant):
@@ -32,17 +31,15 @@ class ArrheniusRateConstant(RateConstant):
         self.A = A
         self.E = E
 
-    def get_k(self, T:float):
+    def get_k(self, T: float):
         return self.A * math.exp(-self.E / (8.314 * T))
 
 @dataclass(frozen=True)
 class ReactionSpecies:
-    #name:str
     species:Species
     coeff:int
 
 class Reaction:
-
     def __init__(self, rate_constant: RateConstant,
                  unit_reactant_species:List[ReactionSpecies], poly_reactant_species:List[ReactionSpecies],
                  unit_product_species:List[ReactionSpecies], poly_product_species:List[ReactionSpecies]):
@@ -58,12 +55,23 @@ class Reaction:
         self.all_species = self.reactant_species + self.product_species
 
     def calculate_rate(self, c: Dict[str, float]) -> float:
-
         # Assumes elementary reactions
-        rate = self.rate_constant.get_k()
-        for reactant_species in self.reactant_species:
-            rate *= reactant_species.coeff * (c[reactant_species.name] ** reactant_species.coeff)
+        rate = self.rate_constant.get_k(273.15)
+        print("rate 1:", rate)
+        for rs in self.reactant_species:
+            print ("other part:", (c[rs.species.name] ** rs.coeff))
+            rate *= rs.coeff * (c[rs.species.name] ** rs.coeff)
+        print("rate 2:", rate)
         return rate
+    
+    def is_species_present(self, species_type: str, species_name: str) -> bool:
+        if species_type == "reactant":
+            return species_name in [s.species.name for s in self.reactant_species]
+        
+        if species_type == "product":
+            return species_name in [s.species.name for s in self.product_species]
+        
+        return False
 
     def __repr__(self):
         return f'Rate Constant:{self.rate_constant},\nUnit Reactant Species: {self.unit_reactant_species},\nPoly Reactant Species: {self.poly_reactant_species},\nUnit Product Species: {self.unit_product_species},\nPoly Product Species: {self.poly_product_species}\n\n'

@@ -1,10 +1,8 @@
 import re
 from parse.parse_input import parse_args_kwargs
-from reactions import RateConstant
+from reactions import RateConstant, ConstantRateConstant, ArrheniusRateConstant
 
 class RateConstantParser:
-
-    # all_constants = []
     
     def __init__(self):
         self.all_constants = []
@@ -27,7 +25,11 @@ class RateConstantParser:
         if 'E' in kwargs:
             kwargs['E'] = float(kwargs['E'])
 
-        constant = RateConstant(name_str, **kwargs)
+        if 'k' in kwargs:
+            constant = ConstantRateConstant(name_str, **kwargs)
+        else:
+            constant = ArrheniusRateConstant(name_str, **kwargs)
+        
         return constant
 
     def parse_reaction_constant(self, reaction_string):

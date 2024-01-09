@@ -8,8 +8,7 @@ class ReactionParser:
         self.species_list = species_list
         self.equivalent_species_list = equivalent_species_list
         self.rcp = rate_constant_parser
-        
-    # Address this function
+       
     def parse_all_reactions(self, reactions_section:List[str]):
         
         list_of_all_reactions = []

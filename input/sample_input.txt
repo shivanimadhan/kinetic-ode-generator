@@ -18,19 +18,20 @@ end
 
 rate constants
     kd    k=1e5 f=0.5
-    kpAAA k=1e3
-    kpAAB k=1e3
-    kpABA k=1e3
-    kpABB k=1e3
-    kpBAA k=1e3
-    kpBAB k=1e3
-    kpBBA k=1e3
-    kpBBB k=1e3
-    ktcAA k=1e3
-    ktcAB k=1e3
-    ktcBB k=1e3
-    ktdAA k=1e3
-    ktdAB k=1e3
+    kpAAA k=30.6
+    kpAAB k=87.6
+    kpABA k=0.735
+    kpABB k=1.52
+    kpBAA k=12.2
+    kpBAB k=36.8
+    kpBBA k=0.311
+    kpBBB k=0.643
+    kdpBB k=0
+    ktcAA k=0
+    ktcAB k=0
+    ktcBB k=0
+    ktdAA k=0
+    ktdAB k=0
     ktdBB A=1e5 E=1e-3
 end
 
@@ -60,7 +61,7 @@ reactions
     PR P[B.B] + B -kpBBB-> P[B.B]
 
     ### Depropagation reactions ###
-    DP P[B.B] -kdBB-> P[-.B] + B
+    DP P[B.B] -kdpBB-> P[-.B] + B
 
     ### Termination (comb.) reactions ###
     TC P[-.A] + P[-.A] -ktcAA-> D
