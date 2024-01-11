@@ -22,7 +22,7 @@ class ConstantRateConstant(RateConstant):
         super().__init__(name, **kwargs)
         self.k = k
 
-    def get_k(self, T: float):
+    def get_k(self):
         return self.k
 
 class ArrheniusRateConstant(RateConstant):
@@ -57,12 +57,35 @@ class Reaction:
     def calculate_rate(self, c: Dict[str, float]) -> float:
         # Assumes elementary reactions
         rate = self.rate_constant.get_k(273.15)
-        print("rate 1:", rate)
+        #print("rate 1:", rate)
         for rs in self.reactant_species:
-            print ("other part:", (c[rs.species.name] ** rs.coeff))
+            #print ("other part:", (c[rs.species.name] ** rs.coeff))
             rate *= rs.coeff * (c[rs.species.name] ** rs.coeff)
-        print("rate 2:", rate)
+        #print("rate 2:", rate)
         return rate
+    
+    def get_rate_string(self, all_species: List[Species]) -> float:
+        # Assumes elementary reactions
+        rate_string_list = [self.rate_constant.name]
+        #print(all_species)
+
+        for rs in self.reactant_species:
+            for i, s in enumerate(all_species):
+                #print(s.name)
+                if (rs.species.name == s.name):
+                    rate_string_list.append(f'c[{i}]')
+
+        rate_string = "*".join(rate_string_list)
+        return rate_string
+        #return rate_string_list
+
+        # rate = self.rate_constant.get_k(273.15)
+        # print("rate 1:", rate)
+        # for rs in self.reactant_species:
+        #     print ("other part:", (c[rs.species.name] ** rs.coeff))
+        #     rate *= rs.coeff * (c[rs.species.name] ** rs.coeff)
+        # print("rate 2:", rate)
+        # return rate
     
     def is_species_present(self, species_type: str, species_name: str) -> bool:
         if species_type == "reactant":

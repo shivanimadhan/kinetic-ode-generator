@@ -91,7 +91,7 @@ def separate_input_file(input_filepath:str)->Dict[str, List[str]]:
     """
 
     sections = {section_header: [] for section_header in VALID_SECTION_HEADERS}
-    print(sections)
+    #print(sections)
 
     with open(input_filepath, 'r') as file:
 

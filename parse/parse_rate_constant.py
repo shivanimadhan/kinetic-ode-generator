@@ -12,10 +12,13 @@ class RateConstantParser:
             constant = self.parse_constants_string(constants_line)
             self.all_constants.append(constant)
 
+        return self.all_constants
+
     def parse_constants_string(self, constants_str:str):
         args, kwargs = parse_args_kwargs(constants_str)
         
-        name_str = args
+        name_str = args[0]
+        print(name_str)
         if 'k' in kwargs:
             kwargs['k'] = float(kwargs['k'])
         if 'f' in kwargs:
@@ -37,7 +40,7 @@ class RateConstantParser:
         match = name.search(reaction_string)
 
         for c in self.all_constants:
-            if (match.group(1) == c.name[0]):
+            if (match.group(1) == c.name):
                 return c
 
         

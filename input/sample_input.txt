@@ -32,7 +32,7 @@ rate constants
     ktcBB k=0
     ktdAA k=0
     ktdAB k=0
-    ktdBB A=1e5 E=1e-3
+    ktdBB k=0
 end
 
 
@@ -69,7 +69,7 @@ reactions
     TC P[-.B] + P[-.B] -ktcBB-> D
 
     ### Termination (disp.) reactions ###
-    TD P[-.A] + P[-.A] -ktcAA-> 2D
-    TD P[-.A] + P[-.B] -ktcAB-> 2D
-    TD P[-.B] + P[-.B] -ktcBB-> 2D
+    TD P[-.A] + P[-.A] -ktdAA-> 2D
+    TD P[-.A] + P[-.B] -ktdAB-> 2D
+    TD P[-.B] + P[-.B] -ktdBB-> 2D
 end
