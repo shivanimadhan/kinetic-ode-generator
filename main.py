@@ -23,10 +23,3 @@ def write_odes(input_file):
     all_reactions = rp.parse_all_reactions(reactions_section)
 
     write_kinetic_odes(all_species, all_reactions, all_constants)
-
-if __name__ == "__write__":
-    if len(sys.argv) != 2:
-        print("Usage: python main.py <input_file>")
-    else:
-        file_name = sys.argv[1]
-        write(file_name)
