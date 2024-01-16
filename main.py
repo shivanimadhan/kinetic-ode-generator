@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 import sys
 
-def write(input_file):
+def write_odes(input_file):
     sections = separate_input_file(input_file)
 
     species_section = sections['species']

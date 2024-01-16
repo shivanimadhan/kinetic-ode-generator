@@ -18,7 +18,7 @@ class RateConstantParser:
         args, kwargs = parse_args_kwargs(constants_str)
         
         name_str = args[0]
-        print(name_str)
+
         if 'k' in kwargs:
             kwargs['k'] = float(kwargs['k'])
         if 'f' in kwargs:
