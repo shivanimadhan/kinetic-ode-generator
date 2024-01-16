@@ -24,8 +24,6 @@ def write(input_file):
 
     write_kinetic_odes(all_species, all_reactions, all_constants)
 
-def solve():
-
 if __name__ == "__write__":
     if len(sys.argv) != 2:
         print("Usage: python main.py <input_file>")
